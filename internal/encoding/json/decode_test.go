@@ -1194,6 +1194,22 @@ func TestDecoder(t *testing.T) {
 			},
 		},
 		{
+			in: `{"":}`,
+			want: []R{
+				{V: ObjectOpen},
+				{V: Name{""}},
+				{E: `unexpected token }`},
+			},
+		},
+		{
+			in: `{"":`,
+			want: []R{
+				{V: ObjectOpen},
+				{V: Name{""}},
+				{E: errEOF},
+			},
+		},
+		{
 			in: `{"34":"89",}`,
 			want: []R{
 				{V: ObjectOpen},
